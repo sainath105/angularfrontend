@@ -1,5 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080/api/associates' // Replace with your Render backend URL
-  };
-  
+    apiUrl: 'https://springbackend-3.onrender.com/' // Replace with your Render backend URL
+};
