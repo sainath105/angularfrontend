@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Associate } from './associate.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssociateService {
-  private apiUrl = 'http://localhost:8080/api/associates';
+  private apiUrl = environment.apiUrl;
+  //private apiUrl = 'https://springbackend-3.onrender.com/api/associates';
 
   constructor(private http: HttpClient) { }
 
@@ -46,10 +48,10 @@ export class AssociateService {
     return this.http.get(`${this.apiUrl}/skill-distribution`);
   }
 
-  
+
   addAssociate(associate: Omit<Associate, 'id'>): Observable<Associate> {
     return this.http.post<Associate>(`${this.apiUrl}`, associate);
-}
+  }
 
-  
+
 }
