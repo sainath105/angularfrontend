@@ -1,0 +1,636 @@
+.kanban-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+
+
+.kanban-table th,
+.kanban-table td {
+  border: 2px solid #ddd;
+  padding: 15px;
+  min-width: 150px;
+}
+
+/* .kanban-table th:nth-child(2) { background-color: #e57373; } 
+.kanban-table th:nth-child(3) { background-color: #64b5f6; } 
+.kanban-table th:nth-child(4) { background-color: #81c784; } 
+.kanban-table th:nth-child(5) { background-color: #8dd2cd } */
+
+.kanban-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.level-column {
+  font-weight: bold;
+  background: #f4f4f4;
+}
+
+.qualification-cell {
+  min-height: 100px;
+  vertical-align: top;
+}
+
+.associate-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.associate-card:hover {
+  transform: scale(1.05);
+  cursor: grab;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.edit-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.associate-name {
+  cursor: pointer;
+  padding: 4px;
+}
+
+.associate-name:hover {
+  background-color: #f0f0f0;
+}
+
+.edit-icon {
+  color: gray;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  color: gray;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.delete-icon {
+  color: gray;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: gray;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  margin-left: 12px;
+}
+
+.associate-name:hover .delete-icon {
+  opacity: 1;
+}
+
+
+.associate-name:hover .edit-icon {
+  opacity: 1;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 4px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  /* Make sure input fits within the card */
+  box-sizing: border-box;
+  /* Prevent extra width issues */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.top-border {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.top-border-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.download-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.download-container button i {
+  margin-right: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #007bc0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.qualification-cell {
+  min-height: 50px;
+  padding: 10px;
+  transition: background 0.3s;
+}
+
+.qualification-cell.drag-over {
+  background: #e3f2fd;
+  border: 2px dashed #007bff;
+}
+
+caption {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Keep title centered */
+  position: relative;
+  /* background: linear-gradient(to right, #4CAF50, #2196F3); */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  /* Soft shadow effect */
+}
+
+.logo {
+  height: 60px;
+  /* Increased size for better visibility */
+  position: absolute;
+  left: 20px;
+  /* Adjust spacing from left */
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  /* Makes text stand out */
+  text-transform: uppercase;
+  /* Enhances title presence */
+  letter-spacing: 2px;
+  /* Adds spacing between letters */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  /* Gives a depth effect */
+}
+
+.analytics-container {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 20px;;
+}
+
+.chart-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+canvas {
+  width: 400px !important;
+  height: 300px !important;
+  will-change: transform;
+}
+/* Modal background (hidden by default) */
+.custom-modal {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Show modal when 'show' class is applied */
+.custom-modal.show {
+  display: flex;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal title */
+.modal-title {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Form styling */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Form group wrapper */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Modal footer buttons */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Open modal button */
+.open-modal-btn {
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* Footer buttons */
+.close-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Hover effects */
+button:hover {
+  opacity: 0.9;
+}
+.add-button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;  /* Align to right */
+  margin: 10px 20px;  /* Add spacing */
+  margin-left: 50px;
+}
+
+.add-button-container button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.add-button-container button:hover {
+  background-color: #0056b3;
+}
+
+.search-container {
+  margin: 10px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.search-container input {
+  padding: 5px 10px;
+  width: 250px;
+  font-size: 14px;
+}
+.search-input {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+.warning-snackbar {
+  background-color: #ff9800;
+  color: black;
+}
+
+.tooltip {
+  position: fixed;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 8px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  pointer-events: none;  /* Important so it doesn't block anything */
+  font-size: 14px;
+}
+.welcome-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.welcome-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.logout-btn:hover {
+  background-color: #0056b3;
+}
+/* Enhanced Media Queries for Small Screens */
+
+/* Tablet and smaller screens (max-width: 768px) */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .logo {
+    height: 40px; /* Reduce logo size for tablets */
+    position: static; /* Reset positioning */
+  }
+
+  .title {
+    font-size: 20px; /* Slightly smaller title */
+    margin-left: 0;
+    margin-top: 5px;
+  }
+
+  .add-button-container {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 20px; /* Adjust margin for mobile */
+    gap: 10px;
+  }
+
+  .search-input {
+    width: 100%; /* Full width on tablets */
+    margin-bottom: 10px;
+    padding: 6px 10px; /* Adjust padding */
+  }
+
+  .action-btn {
+    width: 100%; /* Full width buttons */
+    margin-bottom: 10px;
+    padding: 6px 10px; /* Adjust padding */
+  }
+
+  .welcome-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .welcome-text {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  .logout-btn {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+
+  .kanban-table {
+    display: block;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+  }
+
+  .kanban-table th,
+  .kanban-table td {
+    min-width: 100px; /* Ensure readability */
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .associate-card {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .chart-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  canvas {
+    max-width: 300px !important;
+    height: 200px !important;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+
+/* Phone screens (max-width: 480px) */
+@media (max-width: 480px) {
+  .header {
+    padding: 8px;
+  }
+
+  .logo {
+    height: 35px; /* Smaller logo for phones */
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+
+  .action-btn {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .welcome-text {
+    font-size: 14px;
+  }
+  .welcome-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .logout-btn {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+
+  .kanban-table th,
+  .kanban-table td {
+    font-size: 12px;
+    padding: 5px;
+    min-width: 80px;
+  }
+
+  .associate-card {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .tooltip {
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  canvas {
+    max-width: 250px !important;
+    height: 150px !important;
+  }
+}
+/* Enhanced workaround for dropdown overflow on small screens */
+@media (max-width: 768px) {
+  .custom-modal {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-content {
+    position: relative;
+    overflow: hidden;
+    max-height: 80vh;
+    box-sizing: border-box;
+    padding: 15px;
+    z-index: 1000;
+  }
+
+  .modal-form {
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 30px 8px 8px;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23000000" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+    /* Fallback styling */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Adjust modal padding to reduce overlap perception */
+  .modal-content .form-group {
+    margin-bottom: 10px;
+  }
+}
+
+
+

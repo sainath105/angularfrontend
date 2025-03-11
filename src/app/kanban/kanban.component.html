@@ -1,0 +1,132 @@
+<div class="top-border">
+  <img src="assets/images/topborder.png" alt="Top Border" class="top-border-img">
+</div>
+
+<div class="header">
+  <img src="assets/images/gfd.png" alt="Logo" class="logo">
+  <h2 class="title">Developers Skillboard</h2>
+</div>
+
+<div class="add-button-container">
+  <input type="text" [(ngModel)]="searchQuery" placeholder="🔎 Search..." class="search-input"
+    (input)="applySearchFilter()" />
+  <button class="btn btn-primary action-btn" (click)="openModal()">Add Associate (+)</button>
+  <button class="btn btn-secondary action-btn" (click)="openLanguageModal()">Add Programming Language (+)</button>
+</div>
+
+
+
+<!-- Kanban Board -->
+<div class="kanban-board">
+  <table class="kanban-table">
+    <thead>
+      <tr>
+        <th>Qualification Level</th>
+        <th *ngFor="let language of programmingLanguages">{{ language | titlecase }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let level of qualificationLevels">
+        <td class="level-column">{{ level }}</td>
+        <td *ngFor="let language of programmingLanguages" class="qualification-cell"
+          (drop)="onDrop($event, language, level)" (dragover)="onDragOver($event)">
+          <div *ngFor="let associate of getFilteredAssociates(language, level, filteredAssociates)"
+            class="associate-card" draggable="true" (dragstart)="onDragStart($event, associate)"
+            (mouseenter)="onMouseEnter($event, associate)" (mouseleave)="onMouseLeave()">
+
+            <input *ngIf="associate.isEditing" [(ngModel)]="associate.name" (blur)="saveAssociate(associate)"
+              (keyup.enter)="saveAssociate(associate)" class="edit-input" />
+
+            <div *ngIf="!associate.isEditing" class="associate-name">
+              {{ associate.name | titlecase }}
+              <i class="fas fa-pencil-alt edit-icon" (click)="editAssociate(associate)"></i>
+              <i class="fas fa-trash-alt delete-icon" (click)="deleteAssociate(associate)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Floating Tooltip (shown when hovering over associate) -->
+<div *ngIf="hoveredAssociate" class="tooltip" [ngStyle]="{'top.px': tooltipY, 'left.px': tooltipX}">
+  <p><strong>Name:</strong> {{ hoveredAssociate.name | titlecase}}</p>
+  <p><strong>Language:</strong> {{ hoveredAssociate.programmingLanguage | titlecase }}</p>
+  <p><strong>Level:</strong> {{ hoveredAssociate.qualificationLevel }}</p>
+  <p><strong>Date Added:</strong> {{ hoveredAssociate.dateAdded }}</p>
+</div>
+
+
+<!-- Add Associate Modal -->
+<div class="custom-modal" [class.show]="isModalOpen">
+  <div class="modal-content">
+    <h3 class="modal-title">Add New Associate</h3>
+    <form class="modal-form">
+      <div class="form-group">
+        <label for="associateName">Name</label>
+        <input type="text" id="associateName" [(ngModel)]="newAssociateName" name="associateName"
+          placeholder="Enter Associate Name">
+      </div>
+
+      <div class="form-group dropdown-menu" >
+        <label for="programmingLanguage">Language</label>
+        <select id="programmingLanguage" [(ngModel)]="newAssociateLanguage" name="programmingLanguage"  >
+          <option *ngFor="let lang of programmingLanguages" [value]="lang">{{ lang }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="qualificationLevel">Qualification Level</label>
+        <select id="qualificationLevel" [(ngModel)]="newAssociateLevel" name="qualificationLevel">
+          <option value="" disabled selected>Select Level</option>
+          <option value="L1">L1</option>
+          <option value="L2">L2</option>
+          <option value="L3">L3</option>
+          <option value="L4">L4</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="close-btn" (click)="closeModal()">Close</button>
+        <button type="button" class="save-btn" (click)="addAssociate()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Programming Language Modal -->
+<div class="custom-modal" [class.show]="isLanguageModalOpen">
+  <div class="modal-content">
+    <h3 class="modal-title">Add New Programming Language</h3>
+    <div class="form-group">
+      <label for="newLanguageName">Programming Language</label>
+      <input type="text" id="newLanguageName" [(ngModel)]="newLanguageName" placeholder="Enter Language Name">
+    </div>
+    <div class="modal-footer">
+      <button class="close-btn" (click)="closeLanguageModal()">Close</button>
+      <button class="save-btn" (click)="saveNewLanguage()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Download & Analytics Section -->
+<div class="download-container">
+  <button (click)="downloadKanbanAsHtml()">
+    <i class="fa fa-download"></i> Download
+  </button>
+</div>
+
+<div class="analytics-container">
+  <h3>📊 Skill Board Analytics</h3>
+  <div class="chart-section">
+    <div>
+      <canvas id="levelChart"></canvas>
+      <p class="chart-title">Associates per Level</p>
+    </div>
+    <div>
+      <canvas id="languageChart"></canvas>
+      <p class="chart-title">Skills Distribution</p>
+    </div>
+  </div>
+</div>
