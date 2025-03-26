@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AssociateService {
-  private apiUrl = environment.apiUrl;
-  //private apiUrl = 'https://springbackend-3.onrender.com/api/associates';
+  //private apiUrl = environment.apiUrl;
+  private apiUrl = 'https://springbackend-3.onrender.com/api/associates';
 
   constructor(private http: HttpClient) { }
 
